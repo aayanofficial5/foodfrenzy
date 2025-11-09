@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>Buy Product</title>
+  <style>
+    /* General layout */
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-image: url("https://images.pexels.com/photos/7219747/pexels-photo-7219747.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&dpr=1");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: #fff;
+    }
+
+    a {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: #ffcc00;
+      color: #000;
+      text-decoration: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    a:hover {
+      background-color: #ffa500;
+      transform: scale(1.05);
+    }
+
+    /* Centered container */
+    .container {
+      width: 90%;
+      max-width: 900px;
+      margin: 100px auto 60px auto;
+      text-align: center;
+      backdrop-filter: brightness(0.8);
+    }
+
+    /* Common card styling */
+    .card {
+      background-color: rgba(0, 0, 0, 0.7);
+      border-radius: 12px;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+      padding: 40px;
+      margin-bottom: 40px;
+    }
+
+    /* Search */
+    .searchInput h1 {
+      color: #ffcc00;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+    }
+
+    .searchInput input {
+      padding: 12px;
+      width: 60%;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      margin-right: 10px;
+      font-size: 15px;
+    }
+
+    .searchInput button {
+      padding: 12px 25px;
+      border: none;
+      border-radius: 8px;
+      background-color: #ff5722;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .searchInput button:hover {
+      background-color: #e64a19;
+    }
+
+    /* Product details */
+    .details input,
+    .details button {
+      display: block;
+      margin: 12px auto;
+      padding: 10px;
+      border-radius: 6px;
+      border: none;
+      width: 60%;
+      font-size: 15px;
+      outline: none;
+    }
+
+    .details input {
+      background-color: rgba(255, 255, 255, 0.9);
+      color: #000;
+    }
+
+    .details button {
+      background-color: #4caf50;
+      color: #fff;
+      font-weight: bold;
+      width: 40%;
+      transition: 0.3s;
+    }
+
+    .details button:hover {
+      background-color: #43a047;
+      transform: scale(1.05);
+    }
+
+    .details h2 {
+      color: #ffcc00;
+      margin-bottom: 10px;
+    }
+
+    /* Orders table */
+    .orders h2 {
+      color: #ffcc00;
+      margin-bottom: 20px;
+    }
+
+    table {
+      margin: 0 auto;
+      width: 100%;
+      border-collapse: collapse;
+      border-radius: 10px;
+      overflow: hidden;
+      color: #fff;
+    }
+
+    th, td {
+      padding: 15px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      text-align: center;
+    }
+
+    th {
+      background-color: #ffcc00;
+      color: #000;
+      font-weight: bold;
+    }
+
+    tr:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    @media (max-width: 768px) {
+      .details input, .details button {
+        width: 90%;
+      }
+      .searchInput input {
+        width: 70%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a href="/login">Back</a>
+
+  <div class="container">
+    <!-- Search Section -->
+    <div class="card searchInput">
+      <h1>Search for a Product</h1>
+      <form th:action="@{/product/search}" method="post">
+        <input type="text" name="productName" required placeholder="Enter product name..." />
+        <button type="submit">Search</button>
+        <br><small style="color: #ff9999;" th:text="${message}"></small>
+      </form>
+    </div>
+
+    <!-- Product Details Section -->
+    <div th:if="${product!=null}" class="card details">
+      <h2>Product Details</h2>
+      <form th:action="@{/product/order}" th:object="${product}" method="post">
+        <label>Product Name:</label>
+        <input type="text" th:value="${product.pname}" name="oName" readonly />
+        <label>Product Price:</label>
+        <input type="text" th:value="${product.pprice}" name="oPrice" readonly />
+        <label>Quantity:</label>
+        <input type="number" min="1" name="oQuantity" placeholder="Enter quantity..." />
+        <button type="submit">Order Now</button>
+      </form>
+    </div>
+
+    <!-- Orders Section -->
+    <div th:if="${orders!=null}" class="card orders">
+      <h2>Your Orders</h2>
+      <table>
+        <tr>
+          <th>Product Name</th>
+          <th>Product Price</th>
+          <th>Quantity</th>
+          <th>Total Amount</th>
+          <th>Date</th>
+        </tr>
+        <tr th:each="order : ${orders}">
+          <td th:text="${order.oName}"></td>
+          <td th:text="${order.oPrice}"></td>
+          <td th:text="${order.oQuantity}"></td>
+          <td th:text="${order.totalAmmout}"></td>
+          <td th:text="${order.orderDate}"></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</body>
+</html>
