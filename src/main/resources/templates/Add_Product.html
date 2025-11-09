@@ -1,29 +1,101 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.com">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<meta charset="UTF-8" />
-	<title>Document</title>
-	<link rel="stylesheet" href="" th:href="@{/css/Add_Product.css}" />
+  <meta charset="UTF-8" />
+  <title>Add Product</title>
+  <link rel="stylesheet" href="" th:href="@{/css/Add_Product.css}" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: url('https://images.unsplash.com/photo-1550547660-d9450f859349') no-repeat center center/cover;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .addProducts {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 30px 40px;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+      color: white;
+      width: 400px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+    }
+
+    .addProducts h3 {
+      margin-bottom: 20px;
+      color: #00ff88;
+      font-size: 22px;
+      letter-spacing: 1px;
+    }
+
+    input,
+    textarea {
+      width: 90%;
+      padding: 10px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 8px;
+      outline: none;
+      font-size: 14px;
+      background-color: rgba(255, 255, 255, 0.9);
+    }
+
+    button {
+      width: 70%;
+      padding: 10px;
+      margin-top: 15px;
+      margin-left:-90px;
+      background: linear-gradient(90deg, #00c853, #b2ff59);
+      border: none;
+      border-radius: 8px;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      background: linear-gradient(90deg, #76ff03, #00e676);
+    }
+
+    a {
+      position: absolute;
+      top: 25px;
+      left: 25px;
+      text-decoration: none;
+      background-color: #222;
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: 6px;
+      transition: 0.3s;
+    }
+
+    a:hover {
+      background-color: #00c853;
+      color: #000;
+    }
+  </style>
 </head>
 
 <body>
-<a href="/admin/services">Back to Services</a>
-	<div class="addProducts">
-		<h3 style="font-weight: bolder;color: seagreen;">ADD NEW PRODUCT :</h3>
-		<form action="" th:action="@{/addingProduct}" method="post">
-			Product_Name :
-			<input type="text" name="pname" value="" placeholder="Enter Product Name....." /> <br />
-			Product_Price :
-			<input type="text" name="pprice" placeholder="Enter Product Price...." /><br />
-			Product_Desc : <br />
-			<textarea name="pdescription" id="" cols="15" rows="1"
-				placeholder="Enter Product Description.."></textarea><br />
-
-			<button type="submit">Add_Product</button>
-
-		</form>
-	</div>
+  <a href="/admin/services">Back</a>
+  <div class="addProducts">
+    <h3>ADD NEW PRODUCT</h3>
+    <form action="" th:action="@{/addingProduct}" method="post">
+      <input type="text" name="pname" placeholder="Enter Product Name..." required /><br />
+      <input type="text" name="pprice" placeholder="Enter Product Price..." required /><br />
+      <textarea name="pdescription" cols="15" rows="2" placeholder="Enter Product Description..." required></textarea><br />
+      <button type="submit">Add Product</button>
+    </form>
+  </div>
 </body>
 
 </html>
