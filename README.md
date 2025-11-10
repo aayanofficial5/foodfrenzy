@@ -90,3 +90,13 @@ src/
 └── test/
     └── java/
         └── com.example.demo/      # Unit and integration test cases
+
+## 👥 Contributors
+
+Thanks to these wonderful people for contributing to this project:
+
+| Name | GitHub Profile | Role |
+|------|----------------|------|
+| Aayan Patel | [@aayanpatel](https://github.com/aayanofficial5) |
+| Tanishq Garg | [@tanishqgarg](https://github.com/tanishq995) |
+| Amitabh Shukla | [@amitabhshukla](https://github.com/amitabhshukla) |
