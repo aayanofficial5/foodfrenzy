@@ -2,30 +2,33 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<meta charset="UTF-8" />
-	<title>Document</title>
-	<link rel="stylesheet" href="" th:href="@{/css/Update_Product.css}" />
+  <meta charset="UTF-8" />
+  <title>Product : Update</title>
+  <link rel="stylesheet" href="" th:href="@{/css/Update_Product.css}" />
 </head>
 
 <body>
-		<a href="/services">Back_To_Services</a>
-	<div class="updateProduct">
-		<h3 style="font-weight: bolder;color: seagreen;">UPDATE EXISTING PRODUCT :</h3>
-		<form action="" th:action="@{'/updatingProduct/'+${product.pid}}" th:object="${product}">
-			Product_Id:
-			<input type="hidden" th:text="${product.pid}" th:value="${product.pid}" /><br />
-			Product_Name :
-			<input type="text" name="pname" th:value="${product.pname}" /> <br />
-			Product_Price :
-			<input type="text" name="pprice" th:value="${product.pprice}" /><br />
-			Product_Desc : <br />
-			<textarea name="pdescription" th:value="${product.pdescription}" id="" cols="10" rows="1">
+  <a href="/admin/services">Back</a>
 
-	</textarea><br />
-			<button type="submit">Update_Product</button>
+  <div class="updateProduct">
+    <h3>UPDATE EXISTING PRODUCT</h3>
 
-		</form>
-	</div>
+    <form action="" th:action="@{'/updatingProduct/' + ${product.pid}}" th:object="${product}" method="post">
+      <input type="hidden" name="pid" th:value="${product.pid}" />
+
+      <input type="text" name="pname" placeholder="Enter product name..." th:value="${product.pname}" 
+        class="productName" minlength="2" required><br />
+
+      <input type="number" name="pprice" placeholder="Enter product price..." th:value="${product.pprice}" 
+        class="productPrice" required><br />
+
+      <textarea name="pdescription" placeholder="Enter product description..." class="productDescription"
+        rows="3" required 
+        th:text="${product.pdescription}"></textarea><br />
+
+      <button type="submit">Update Product</button>
+    </form>
+  </div>
 </body>
 
 </html>
